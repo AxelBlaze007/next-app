@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import gilroy from "@/ui/fonts";
 import { Header } from "@/components/Header";
+import { ThemeProvider } from "../components/themes/theme-provider";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -15,14 +16,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={gilroy.className}>
-        <Header />
-        <main className="min-h-screen flex-1 overflow-y-auto overflow-x-hidden py-24 px-8 bg-secondary/20 flex flex-col">
-          {" "}
-          {children}
-        </main>
-      </body>
+    <html suppressHydrationWarning lang="en">
+      <ThemeProvider>
+        <body className={gilroy.className}>
+          <Header />
+          <main className="min-h-screen flex-1 overflow-y-auto overflow-x-hidden py-24 px-8 bg-secondary/20 flex flex-col">
+            {children}
+          </main>
+        </body>
+      </ThemeProvider>
     </html>
   );
 }
